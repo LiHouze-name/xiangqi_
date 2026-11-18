@@ -1,5 +1,7 @@
 package edu.sustech.xiangqi.model;
 
+// 啥也没改，加个注释，我测试一下你你那边看不看得到
+
 public class Car extends Piece {
     public Car(Boolean isRed) {
         super(isRed?"俥":"車",isRed );
