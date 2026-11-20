@@ -14,7 +14,7 @@ public class ChessController extends MouseAdapter {
     private final Board board;
     private final BoardPanel boardPanel;
 
-    // 默认 -1 没有选中任何棋子
+    // 默认 -1 没有选中任何棋子，而且selectedRow和selectedCol只在选中棋子时才会被赋值
     private int selectedRow = -1;
     private int selectedCol = -1;
 
@@ -35,16 +35,17 @@ public class ChessController extends MouseAdapter {
         }
     }
 
+
     private void handleClick(int row, int col) {
-        if (row == selectedRow && col == selectedCol) {
+        if (row == selectedRow && col == selectedCol) {   // 第一种情况：点击已选中的棋子
             clearSelection();
             return;
         }
 
         Piece clickedPiece = board.getPieceAt(row, col);
-        if (selectedRow == -1) {
-            if (clickedPiece != null) {
-                select(row, col);
+        if (selectedRow == -1) {   // 第二种情况：没有选中任何棋子时，点击棋子则选中
+            if (clickedPiece != null && clickedPiece.isRed() == board.getISREDTURN()) {
+                select(row, col);   
             }
             return;
         }
