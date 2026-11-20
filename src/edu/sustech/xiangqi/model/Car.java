@@ -13,6 +13,21 @@ public class Car extends Piece {
         if (Math.abs(toRow - fromRow)*Math.abs(toCol - fromCol) != 0||Math.abs(toRow - fromRow)+Math.abs(toCol - fromCol)==0) {
             return false;
         }
+        // 直走时不能有棋子挡路
+        if (toRow == fromRow) {
+            for(int i = Math.min(fromCol, toCol) + 1; i < Math.max(fromCol, toCol); i++) {
+                if (board.getPieceAt(fromRow, i) != null) {
+                    return false;
+                }
+            }
+        }
+        if (toCol == fromCol) {
+            for(int i = Math.min(fromRow, toRow) + 1; i < Math.max(fromRow, toRow); i++) {
+                if (board.getPieceAt(i, fromCol) != null) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 }

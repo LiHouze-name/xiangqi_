@@ -10,6 +10,11 @@ public class Elephant extends Piece{
         if (Math.abs(toRow - fromRow)!=2||Math.abs(toCol - fromCol) != 2||board.getPieceAt(fromRow+(toRow - fromRow)/2, fromCol+(toCol - fromCol)/2)!=null||fromRow+(toRow - fromRow)/2==4||fromRow+(toRow - fromRow)/2==5) {
             return false;
         }
+
+        // 不能过河
+        if((isRed()&&toRow<5)||(!isRed()&&toRow>4)){
+            return false;
+        }
         return true;
     }
 }

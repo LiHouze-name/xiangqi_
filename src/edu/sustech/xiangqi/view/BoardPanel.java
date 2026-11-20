@@ -17,7 +17,7 @@ import java.awt.RenderingHints;
 // 绘制棋盘、棋子和选中效果
 public final class BoardPanel extends JPanel {
     private static final long serialVersionUID = 1L;
-    private static final int CELL_SIZE = 52;
+    private static final int CELL_SIZE = 52; //
     private static final int MARGIN = 36;
     private static final int PIECE_RADIUS = 21;
     private static final int HIT_RADIUS = 23;
@@ -34,7 +34,7 @@ public final class BoardPanel extends JPanel {
                 MARGIN * 2 + CELL_SIZE * (Board.ROWS - 1)));
     }
 
-    // 返回交叉点坐标
+    // 返回交叉点坐标（棋盘坐标）
     public Point getIntersectionAt(int x, int y) {
         int col = (int) Math.round((x - MARGIN) / (double) CELL_SIZE);
         int row = (int) Math.round((y - MARGIN) / (double) CELL_SIZE);

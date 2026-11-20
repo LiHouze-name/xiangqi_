@@ -77,6 +77,7 @@ public class Board {
         return row >= 0 && row < ROWS && col >= 0 && col < COLS;
     }
 
+    // 判断传入的棋盘位置是否有棋子，有的话返回到底是什么棋子
     public Piece getPieceAt(int row, int col) {
         if (!isInside(row, col)) {
             return null;
@@ -111,12 +112,30 @@ public class Board {
             return false;
         }
 
+        // 单独判断将帅照面
+        if(getPieceAt(fromRow, fromCol) instanceof GeneralPiece&&getPieceAt(toRow, toCol) instanceof GeneralPiece){
+            if(fromCol==toCol){
+                for(int i=Math.min(fromRow,toRow)+1;i<Math.max(fromRow,toRow);i++){
+                    if(getPieceAt(i,fromCol)!=null){
+                        return false;
+                    }
+                }
+                pieces[fromRow][fromCol] = null;
+                pieces[toRow][toCol] = piece;
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         if (!piece.canMove(this, fromRow, fromCol, toRow, toCol)) {
             return false;//棋子自身行走规则
         }
 
         // TODO: 检查走完后己方将帅是否安全
-
+        if (getPieceAt(fromRow, fromCol) instanceof GeneralPiece){
+            // TODO: 把各种面板处理好后再写这个finish方法
+        }
 
         pieces[fromRow][fromCol] = null;
         pieces[toRow][toCol] = piece;
